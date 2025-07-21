@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react'
 import { AppComponents, APPLICATIONS_MAP } from './components/applications'
 
 const App = () => {
-
   const currentApplication = useAtomValue(currentApplicationAtom)
   const [currentApp, setCurrentApp] = useState<AppComponents | null>(null)
 
@@ -21,9 +20,7 @@ const App = () => {
     <>
       <DraggableTopBar />
       <RootLayout>
-        <Sidebar className="p-2">
-          {currentApp && <currentApp.Sidebar />}
-        </Sidebar>
+        <Sidebar className="p-2">{currentApp && <currentApp.Sidebar />}</Sidebar>
         <Content className="border-l bg-zinc-900/50 border-l-white/20">
           {currentApp && <currentApp.Content />}
         </Content>

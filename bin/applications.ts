@@ -65,8 +65,8 @@ export default ${capitalizedAnswer}`
     const contentFilePath = path.join(newAppPath, `${capitalizedAnswer}Content.tsx`)
     const sidebarFilePath = path.join(newAppPath, `${capitalizedAnswer}Sidebar.tsx`)
 
-    const contentContent = ApplicationContent.replace(/[{]XXX[}]/g, 'Content');
-    const sidebarContent = ApplicationContent.replace(/[{]XXX[}]/g, 'Sidebar');
+    const contentContent = ApplicationContent.replace(/[{]XXX[}]/g, 'Content')
+    const sidebarContent = ApplicationContent.replace(/[{]XXX[}]/g, 'Sidebar')
     const indexContent = ApplicationIndex
 
     fs.writeFileSync(contentFilePath, contentContent)
@@ -114,13 +114,15 @@ export default ${capitalizedAnswer}`
     // Insertion des imports
     const nameIndex = constantContent.indexOf(importApplicationNameComment)
     if (nameIndex !== -1 && !constantContent.includes(newApplicationName.trim())) {
-      constantContent = constantContent.slice(0, nameIndex) + newApplicationName + constantContent.slice(nameIndex)
+      constantContent =
+        constantContent.slice(0, nameIndex) + newApplicationName + constantContent.slice(nameIndex)
     }
 
     // Insertion du mapping
     const objIndex = constantContent.indexOf(importApplicationObjComment)
     if (objIndex !== -1 && !constantContent.includes(newApplicationObj.trim())) {
-      constantContent = constantContent.slice(0, objIndex) + newApplicationObj + constantContent.slice(objIndex)
+      constantContent =
+        constantContent.slice(0, objIndex) + newApplicationObj + constantContent.slice(objIndex)
     }
 
     fs.writeFileSync(applicationsConstantPath, constantContent, 'utf-8')
