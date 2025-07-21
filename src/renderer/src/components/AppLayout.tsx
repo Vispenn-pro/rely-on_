@@ -11,12 +11,9 @@ export const RootLayout = ({ children, className, ...props }: ComponentProps<'ma
 
 export const Sidebar = ({ className, children, ...props }: ComponentProps<'aside'>) => {
   return (
-    <div className="max-w-[250px] h-max flex flex-row flex-wrap gap-0">
-      <h1 className="w-[250px] text-xl min-h-[64px] pl-2 pt-9">Rely on_</h1>
-      <aside
-        className={twMerge('w-[250px] h-dvh', className)}
-        {...props}
-      >
+    <div className="max-w-[262px] h-max flex flex-row flex-wrap gap-0">
+      <h1 className="w-[262px] text-xl min-h-[64px] pl-2 pt-9">Rely on_</h1>
+      <aside className={twMerge('w-[262px] h-dvh', className)} {...props}>
         {children}
       </aside>
     </div>
