@@ -19,6 +19,7 @@
     "apps:create": "ts-node bin/applications.ts"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^4.0.0",
     "fs": "^0.0.1-security",

@@ -2,6 +2,7 @@ import { app, shell, ipcMain, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import KanbanIPCHandlers from './libs/kanban'
 
 function createWindow(): void {
   // Create the browser window.
@@ -66,6 +67,8 @@ app.whenReady().then(() => {
   ipcMain.on('ping', () => console.log('pong'))
 
   createWindow()
+
+  KanbanIPCHandlers(ipcMain)
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
