@@ -1,9 +1,9 @@
-import Content from "./KanbanContent"
-import Sidebar from "./KanbanSidebar"
+import Content from './KanbanContent'
+import Sidebar from './KanbanSidebar'
 
 const Kanban = {
   Sidebar,
-  Content,
+  Content
 }
 
 export default Kanban

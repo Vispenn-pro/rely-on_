@@ -3,7 +3,7 @@ import NotesContent from './NotesContent'
 
 const Notes = {
   Sidebar: NotesSidebar,
-  Content: NotesContent,
+  Content: NotesContent
 }
 
 export default Notes

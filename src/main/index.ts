@@ -101,7 +101,7 @@ const handleClose = (event) => {
 const handleMaximize = (event) => {
   const webContents = event.sender
   const win = BrowserWindow.fromWebContents(webContents)
-  if(win?.isMaximized()) {
+  if (win?.isMaximized()) {
     win?.unmaximize()
   } else {
     win?.maximize()

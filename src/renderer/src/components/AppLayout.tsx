@@ -13,7 +13,6 @@ export const RootLayout = ({ children, className, ...props }: ComponentProps<'ma
 }
 
 export const Sidebar = ({ className, children, ...props }: ComponentProps<'aside'>) => {
-
   const currentApplication = useAtomValue(currentApplicationAtom)
 
   return (
@@ -25,10 +24,7 @@ export const Sidebar = ({ className, children, ...props }: ComponentProps<'aside
         </div>
         <ApplicationsMenu className={twMerge('p-1 cursor-pointer')} />
       </div>
-      <aside
-        className={twMerge('w-[250px] h-dvh', className)}
-        {...props}
-      >
+      <aside className={twMerge('w-[250px] h-dvh', className)} {...props}>
         {children}
       </aside>
     </div>
