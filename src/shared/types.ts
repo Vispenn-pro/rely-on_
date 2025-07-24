@@ -25,7 +25,6 @@ export type KanbanType = {
 export type KanbanColumnType = {
   id: string
   name: string
-  order: number
 }
 
 export type KanbanItemType = {
@@ -33,6 +32,5 @@ export type KanbanItemType = {
   title: string
   description?: string
   columnId: string
-  order: number
 }
 //#endregion

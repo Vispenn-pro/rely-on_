@@ -15,11 +15,9 @@ export const useKanban = () => {
         window.kanban.getKanbans()
             .then((previews: KanbanPreviewType[]) => {
                 setKanbanPreview(previews);
-                console.log('Kanban Previews:', previews);
             })
             .catch((error) => {
                 console.error('Failed to fetch kanban previews:', error);
-                console.log('Fallback to default kanban previews');
             });
     }
 
@@ -33,5 +31,16 @@ export const useKanban = () => {
         }
     };
 
-    return { kanbanPreviews, currentKanban, setCurrentKanban, fetchKanbanById }
+    const getItemsByColumnId = (columnId: string) => {
+        return currentKanban?.items.filter(item => item.columnId === columnId) || [];
+    }
+
+    const updateKanban = async (kanban: KanbanType, setAsCurrentKanban: boolean = false) => {
+        if(setAsCurrentKanban) setCurrentKanban(kanban);
+        const result = await window.kanban.updateKanban(kanban);
+        if(setAsCurrentKanban && result !== kanban) setCurrentKanban(result)
+        return result;
+    }
+
+    return { kanbanPreviews, currentKanban, setCurrentKanban, updateKanban, fetchKanbanById, getItemsByColumnId }
 }

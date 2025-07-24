@@ -11,15 +11,9 @@ declare global {
     kanban: {
       getKanbans: () => Promise<KanbanPreviewType[]>
       getKanban: (id: string) => Promise<KanbanType>
-      createKanban: (id: string) => Promise<KanbanType>
+      createKanban: (name: string) => Promise<KanbanType>
       deleteKanban: (id: string) => Promise<KanbanType>
-      updateKanban: (id: string) => Promise<KanbanType>
-      createColumn: (id: string) => Promise<KanbanColumnType>
-      deleteColumn: (id: string) => Promise<KanbanColumnType>
-      updateColumn: (id: string) => Promise<KanbanColumnType>
-      createItem: (id: string) => Promise<KanbanItemType>
-      deleteItem: (id: string) => Promise<KanbanItemType>
-      updateItem: (id: string) => Promise<KanbanItemType>
+      updateKanban: (kanban: KanbanType) => Promise<KanbanType>
     }
   }
 }
