@@ -11,13 +11,13 @@ export type ApplicationType = {
 export type KanbanPreviewType = {
   id: string
   name: string
-  lastActivity: string
+  lastActivity: Date
 }
 
 export type KanbanType = {
   id: string
   name: string
-  lastActivity: string
+  lastActivity: Date
   columns: KanbanColumnType[]
   items: KanbanItemType[]
 }

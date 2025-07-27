@@ -4,17 +4,17 @@ export const sampleKanbanPreviewMockDatas: KanbanPreviewType[] = [
     {
         id: "kanban-1",
         name: "Project Management",
-        lastActivity: new Date().toISOString(),
+        lastActivity: new Date(),
     },
     {
         id: "kanban-2",
         name: "Marketing Campaign",
-        lastActivity: new Date().toISOString(),
+        lastActivity: new Date(),
     },
     {
         id: "kanban-3",
         name: "Product Development",
-        lastActivity: new Date().toISOString(),
+        lastActivity: new Date()
     },
 ]
 
@@ -22,7 +22,7 @@ export const sampleKanbansMock: KanbanType[] = [
   {
     id: "kanban-1",
     name: "Project Management",
-    lastActivity: new Date().toISOString(),
+    lastActivity: new Date(),
     columns: [
       { id: "col-1", name: "Backlog" },
       { id: "col-2", name: "To Do" },
@@ -54,7 +54,7 @@ export const sampleKanbansMock: KanbanType[] = [
   {
     id: "kanban-2",
     name: "Marketing Campaign",
-    lastActivity: new Date().toISOString(),
+    lastActivity: new Date(),
     columns: [
       { id: "col-21", name: "Ideas" },
       { id: "col-22", name: "Planning" },
@@ -82,7 +82,7 @@ export const sampleKanbansMock: KanbanType[] = [
   {
     id: "kanban-3",
     name: "Product Development",
-    lastActivity: new Date().toISOString(),
+    lastActivity: new Date(),
     columns: [
       { id: "col-31", name: "Research" },
       { id: "col-32", name: "Design" },

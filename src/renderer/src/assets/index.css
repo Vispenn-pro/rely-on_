@@ -22,4 +22,27 @@
   button {
     app-region: no-drag;
   }
+
+  body {
+    background: transparent;
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #27272a #52525b;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #52525b; /* zinc-600 */
+  border-radius: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #27272a; /* zinc-800 */
+  border-radius: 6px;
 }
