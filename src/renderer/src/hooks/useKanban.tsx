@@ -1,5 +1,5 @@
-import { currentKanbanAtom, kanbanPreviewAtom } from '@renderer/store'
-import { KanbanType } from '@shared/types'
+import { currentKanbanAtom, currentTaskAtom, kanbanPreviewAtom } from '@renderer/store'
+import { KanbanItemType, KanbanLabelType, KanbanType } from '@shared/types'
 import { useAtom } from 'jotai'
 import { useEffect } from 'react'
 
@@ -7,6 +7,7 @@ export const useKanban = () => {
 
     const [kanbanPreviews, setKanbanPreview] = useAtom(kanbanPreviewAtom)
     const [currentKanban, setCurrentKanban] = useAtom(currentKanbanAtom)
+    const [currentTask, setCurrentTask] = useAtom(currentTaskAtom)
 
     const fetchKanbanPreviews = async () => setKanbanPreview(await window.kanban.getKanbans())
 
@@ -19,6 +20,13 @@ export const useKanban = () => {
             return null;
         }
     };
+
+    const setActiveTask = (task: KanbanItemType | null) => setCurrentTask(task)
+
+    const setActiveKanban = (kanban: KanbanType | null) => {
+        setActiveTask(null)
+        setCurrentKanban(kanban)
+    }
 
     const getItemsByColumnId = (columnId: string) => {
         return currentKanban?.items.filter(item => item.columnId === columnId) || [];
@@ -40,7 +48,10 @@ export const useKanban = () => {
     const createNewKanban = async (setAsCurrentKanban: boolean = false) => {
         const result = await window.kanban.createKanban(`Kanban #${Math.floor(Math.random() * 9000) + 1000}`);
         createPreview(result)
-        if (setAsCurrentKanban) setCurrentKanban(result)
+        if (setAsCurrentKanban) {
+            setCurrentKanban(result)
+            setCurrentTask(null)
+        }
         return result;
     }
 
@@ -54,11 +65,11 @@ export const useKanban = () => {
         );
     }
 
-    const deleteKanban = async(id: string) => {
+    const deleteKanban = async (id: string) => {
         const result = await window.kanban.deleteKanban(id)
         removePreview(result)
-        if(currentKanban?.id === result.id) {
-            if(kanbanPreviews.length > 0) {
+        if (currentKanban?.id === result.id) {
+            if (kanbanPreviews.length > 0) {
                 const newKanban = await fetchKanbanById(kanbanPreviews[0].id)
                 setCurrentKanban(newKanban)
             } else {
@@ -68,9 +79,21 @@ export const useKanban = () => {
         return result;
     }
 
+    const updateTask = async (task: KanbanItemType) => {
+        const updatedKanban = {
+            ...currentKanban,
+            items: currentKanban?.items.map(tk => tk.id === task.id ? task : tk)
+        } as KanbanType
+
+        setActiveTask(task);
+        await updateKanban(updatedKanban, true)
+    }
+
+    const fetchLabelById = (id: KanbanLabelType['id']) : KanbanLabelType| undefined => currentKanban?.labels.find((label) => label.id === id);
+
     const updatePreview = (kanban: KanbanType) => setKanbanPreview(prev => prev.map(kb => kb.id === kanban.id ? { ...kb, name: kanban.name, lastActivity: kanban.lastActivity } : kb));
     const createPreview = (kanban: KanbanType) => setKanbanPreview(prev => [...prev, { id: kanban.id, name: kanban.name, lastActivity: kanban.lastActivity }]);
     const removePreview = (kanban: KanbanType) => setKanbanPreview(kanbanPreviews.filter(kb => kb.id !== kanban.id));
 
-    return { kanbanPreviews, currentKanban, deleteKanban, setCurrentKanban, updateKanban, fetchKanbanById, getItemsByColumnId, createNewKanban, fetchKanbanPreviews }
+    return { fetchLabelById, currentTask, updateTask, setActiveTask, kanbanPreviews, currentKanban, deleteKanban, setActiveKanban, updateKanban, fetchKanbanById, getItemsByColumnId, createNewKanban, fetchKanbanPreviews }
 }

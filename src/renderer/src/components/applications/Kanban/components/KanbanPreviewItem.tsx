@@ -8,7 +8,7 @@ type Props = {
 
 export default function KanbanPreviewItem({ kanban }: Props) {
 
-    const { setCurrentKanban, fetchKanbanById } = useKanban()
+    const { setActiveKanban, fetchKanbanById } = useKanban()
 
     const handleKanbanClick = async (id: string) => {
         const kanban = await fetchKanbanById(id)
@@ -16,7 +16,7 @@ export default function KanbanPreviewItem({ kanban }: Props) {
             console.error('Kanban not found or failed to fetch');
             return;
         }
-        setCurrentKanban(kanban)
+        setActiveKanban(kanban)
     }
 
     return (

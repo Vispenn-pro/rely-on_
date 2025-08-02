@@ -20,6 +20,7 @@ export type KanbanType = {
   lastActivity: Date
   columns: KanbanColumnType[]
   items: KanbanItemType[]
+  labels: KanbanLabelType[]
 }
 
 export type KanbanColumnType = {
@@ -32,5 +33,12 @@ export type KanbanItemType = {
   title: string
   description?: string
   columnId: string
+  labels: KanbanLabelType['id'][]
+}
+
+export type KanbanLabelType = {
+  id: string
+  title: string
+  color: string
 }
 //#endregion

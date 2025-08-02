@@ -16,7 +16,7 @@ export const Sidebar = ({ className, children, ...props }: ComponentProps<'aside
   const currentApplication = useAtomValue(currentApplicationAtom)
 
   return (
-    <div className="max-w-[250px] h-max flex flex-row flex-wrap gap-0">
+    <aside className="max-w-[250px] h-max flex flex-row flex-wrap gap-0">
       <div className="flex items-center justify-between min-h-[64px] w-full px-2 pt-9">
         <div className="flex flex-col">
           <h1 className="text-xl">Rely on_</h1>
@@ -27,15 +27,15 @@ export const Sidebar = ({ className, children, ...props }: ComponentProps<'aside
       <aside className={twMerge('w-[250px] h-dvh', className)} {...props}>
         {children}
       </aside>
-    </div>
+    </aside>
   )
 }
 
 export const Content = forwardRef<HTMLDivElement, ComponentProps<'div'>>(
   ({ children, className, ...props }, ref) => (
-    <div ref={ref} className={twMerge('flex-1 overflow-auto pt-8 pb-2 px-2', className)} {...props}>
+    <main ref={ref} className={twMerge('flex-1 overflow-auto pt-8 pb-2 px-2', className)} {...props}>
       {children}
-    </div>
+    </main>
   )
 )
 

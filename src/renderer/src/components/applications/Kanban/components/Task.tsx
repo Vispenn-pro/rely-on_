@@ -1,5 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { useKanban } from '@renderer/hooks/useKanban';
 import { KanbanItemType } from '@shared/types'
 
 type Props = {
@@ -7,6 +8,8 @@ type Props = {
 }
 
 export default function Task({ task }: Props) {
+
+  const { setActiveTask } = useKanban()
 
   const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
     id: task.id,
@@ -29,7 +32,7 @@ export default function Task({ task }: Props) {
   }
 
   return (
-    <div ref={setNodeRef} {...attributes} {...listeners} style={style} className="p-2 bg-zinc-800 rounded-md h-[75px] min-h-[75px]">
+    <div ref={setNodeRef} {...attributes} {...listeners} style={style} className="p-2 bg-zinc-800 rounded-md h-[75px] min-h-[75px]" onClick={() => setActiveTask(task)}>
       <div  className='w-full flex items-center gap-2'>
         <div className="flex justify-between w-full">
           <span>{task.title}</span>

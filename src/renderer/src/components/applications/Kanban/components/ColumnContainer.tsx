@@ -13,7 +13,7 @@ type Props = {
 
 const ColumnContainer = ({ column }: Props) => {
 
-  const { currentKanban, updateKanban, getItemsByColumnId, setCurrentKanban } = useKanban();
+  const { currentKanban, updateKanban, getItemsByColumnId, setActiveKanban } = useKanban();
   const items = useMemo(() => getItemsByColumnId(column.id), [column]);
   const tasksIds = useMemo(() => items.map(item => item.id) || [], [items]);
 
@@ -63,13 +63,13 @@ const ColumnContainer = ({ column }: Props) => {
       columns: currentKanban.columns.filter(col => col.id !== column.id),
       items: currentKanban.items.filter(item => item.columnId !== column.id),
     };
-    setCurrentKanban(updatedKanban);
+    setActiveKanban(updatedKanban);
     const result = await updateKanban(updatedKanban);
-    if (result !== updatedKanban) setCurrentKanban(result);
+    if (result !== updatedKanban) setActiveKanban(result);
   }
 
   const handleNewTaskModal = async () => {
-    handleNewTask("Je suis une tâche")
+    handleNewTask(`Nouvelle tâche #${Math.floor(Math.random() * 9000) + 1000}`);
   }
 
   const handleNewTask = async (title: string) => {
@@ -78,7 +78,8 @@ const ColumnContainer = ({ column }: Props) => {
       id: crypto.randomUUID(),
       title,
       description: "",
-      columnId: column.id
+      columnId: column.id,
+      labels: []
     };
     const updatedKanban = {
       ...currentKanban,
